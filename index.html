@@ -800,6 +800,10 @@
       const respuesta = data.respuesta || "Disculpa, tuve un problema para responder. ¿Puedes intentar de nuevo?";
       agregarMensaje("bot", respuesta);
       historial.push({ role: "assistant", content: respuesta });
+
+      if (data.leadGuardado) {
+        agregarMensaje("bot", "Listo, dejé tus datos registrados para que el equipo de Táctika pueda contactarte y coordinar el siguiente paso.");
+      }
     } catch (e) {
       indicador.remove();
       agregarMensaje("bot", "Hubo un error de conexión. Intenta de nuevo en un momento.");
