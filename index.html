@@ -131,6 +131,16 @@
     display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mist);
   }
   .microtrust .dot{width:6px;height:6px;border-radius:50%;background:var(--amber-500);}
+  .hero-proof{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    margin-top:28px;max-width:620px;
+  }
+  .proof-item{
+    background:rgba(255,255,255,0.72);border:1px solid var(--line);
+    border-radius:12px;padding:13px 14px;
+  }
+  .proof-item strong{display:block;color:var(--navy-900);font-size:18px;font-family:'Space Grotesk',sans-serif;}
+  .proof-item span{display:block;color:var(--mist);font-size:12.5px;margin-top:2px;}
 
   .fade-up{opacity:0;transform:translateY(14px);animation:fadeUp .6s ease forwards;}
   @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
@@ -200,7 +210,7 @@
 
   /* ---------- PROCESO (numbered — real sequence) ---------- */
   .proceso{background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;position:relative;}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
   .step{padding:0 26px;position:relative;}
   .step:not(:last-child)::after{
     content:"";position:absolute;top:26px;right:-2px;width:1px;height:calc(100% - 26px);
@@ -212,6 +222,34 @@
   }
   .step h3{font-size:19px;color:var(--navy-900);margin-bottom:10px;}
   .step p{color:var(--mist);font-size:14.5px;margin:0;}
+
+  /* ---------- OFERTA ---------- */
+  .oferta-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:28px;align-items:start;}
+  .offer-main{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px;box-shadow:0 18px 40px -28px rgba(15,22,38,0.22);
+  }
+  .offer-main h3{font-size:22px;color:var(--navy-900);margin-bottom:12px;}
+  .offer-main p{color:var(--mist);font-size:15px;margin:0 0 20px;}
+  .offer-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0 24px;}
+  .offer-list div{
+    border:1px solid var(--line);border-radius:12px;padding:14px;background:#FAFBFC;
+    color:var(--navy-900);font-size:13.5px;font-weight:600;
+  }
+  .price-box{
+    background:var(--navy-900);color:var(--white);border-radius:16px;
+    padding:26px;border:1px solid rgba(255,255,255,0.08);
+  }
+  .price-box .tag{color:var(--amber-400);font-size:12px;text-transform:uppercase;font-weight:700;letter-spacing:0.08em;}
+  .price-box .price{font-family:'Space Grotesk',sans-serif;font-size:34px;font-weight:700;margin:8px 0 8px;}
+  .price-box p{color:#B7C1DC;font-size:14px;margin:0 0 18px;}
+  .price-row{
+    display:flex;justify-content:space-between;gap:16px;
+    border-top:1px solid rgba(255,255,255,0.10);padding:13px 0;
+    color:#DCE3F5;font-size:13.5px;
+  }
+  .price-row:last-child{padding-bottom:0;}
+  .price-row strong{color:var(--white);font-family:'JetBrains Mono',monospace;}
 
   /* ---------- PLATAFORMA ---------- */
   .plat{
@@ -339,8 +377,11 @@
     .menu-btn{display:block;}
     .hero-grid{grid-template-columns:1fr;}
     .hero h1{font-size:34px;}
+    .hero-proof{grid-template-columns:1fr;}
     .steps{grid-template-columns:1fr;gap:34px;}
     .step:not(:last-child)::after{display:none;}
+    .oferta-grid{grid-template-columns:1fr;}
+    .offer-list{grid-template-columns:1fr;}
     .plat{grid-template-columns:1fr;padding:36px 24px;border-radius:18px;}
     .pq-grid{grid-template-columns:1fr;}
     .cta-grid{grid-template-columns:1fr;}
@@ -354,12 +395,14 @@
   <div class="nav">
     <div class="brand"><span class="mark">T</span> Táctika Consulting</div>
     <nav class="navlinks">
-      <a href="#servicios">Servicios</a>
+      <a href="#servicios">Oferta</a>
       <a href="#plataforma">Plataforma</a>
       <a href="#proceso">Cómo trabajamos</a>
+      <a href="#precios">Precios</a>
       <a href="#contacto">Contacto</a>
     </nav>
     <div class="navcta">
+      <a href="https://app.tactikaconsulting.com" class="btn btn-ghost btn-sm">Ingresar</a>
       <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20para%20mi%20empresa" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Agendar diagnóstico</a>
       <button class="menu-btn" aria-label="Abrir menú"><span></span><span></span><span></span></button>
     </div>
@@ -369,15 +412,20 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow fade-up">Asesoría para pymes · Buin y Región Metropolitana</span>
-      <h1 class="fade-up" style="animation-delay:.05s">Ordena tu empresa con asesoría real <em>y una plataforma</em> que muestra el avance.</h1>
-      <p class="lead fade-up" style="animation-delay:.1s">Diagnosticamos tu empresa, armamos un plan de acción con responsables y plazos, y le hacemos seguimiento en Táctika Business Suite — la misma herramienta que usamos para trabajar contigo, no un informe que se pierde en un correo.</p>
+      <span class="eyebrow fade-up">Método Táctika · Consultoría + sistema propio</span>
+      <h1 class="fade-up" style="animation-delay:.05s">Ordenamos tu pyme con diagnóstico, plan de acción <em>y un sistema hecho para tu empresa.</em></h1>
+      <p class="lead fade-up" style="animation-delay:.1s">Primero entendemos cómo trabaja tu negocio. Luego diseñamos una solución concreta y la implementamos en Táctika Suite para que puedas controlar clientes, tareas, propuestas, reportes y seguimiento desde un solo lugar.</p>
       <div class="hero-ctas fade-up" style="animation-delay:.15s">
-        <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20para%20mi%20empresa" target="_blank" rel="noopener" class="btn btn-primary">Agendar diagnóstico por WhatsApp</a>
+        <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20T%C3%A1ctika%20para%20mi%20empresa" target="_blank" rel="noopener" class="btn btn-primary">Agendar diagnóstico</a>
         <a href="#capturas" class="btn btn-ghost">Ver cómo funciona la plataforma</a>
       </div>
       <div class="microtrust fade-up" style="animation-delay:.2s">
-        <span class="dot"></span> Sin letra chica: primera reunión de diagnóstico, sin costo.
+        <span class="dot"></span> Diagnóstico de entrada desde $29.990. Si avanzas con la implementación, puede descontarse del proyecto.
+      </div>
+      <div class="hero-proof fade-up" style="animation-delay:.25s">
+        <div class="proof-item"><strong>01</strong><span>Diagnóstico claro</span></div>
+        <div class="proof-item"><strong>02</strong><span>Sistema configurado</span></div>
+        <div class="proof-item"><strong>03</strong><span>Acompañamiento mensual</span></div>
       </div>
     </div>
 
@@ -389,16 +437,16 @@
       <div class="mock-title">Táctika Business Suite</div>
       <div class="mock-sub">Panel de tu empresa</div>
       <div class="mock-stats">
-        <div class="mock-card"><div class="lbl">Diagnósticos</div><div class="val">3</div></div>
-        <div class="mock-card accent"><div class="lbl">Cumplimiento</div><div class="val">64%</div></div>
-        <div class="mock-card"><div class="lbl">Planes activos</div><div class="val">7</div></div>
+        <div class="mock-card"><div class="lbl">Prospectos</div><div class="val">18</div></div>
+        <div class="mock-card accent"><div class="lbl">Pipeline</div><div class="val">$4.2M</div></div>
+        <div class="mock-card"><div class="lbl">Propuestas</div><div class="val">6</div></div>
         <div class="mock-card"><div class="lbl">Seguimientos</div><div class="val">12</div></div>
       </div>
       <div class="mock-bars">
-        <div class="lbl">Avance por área</div>
-        <div class="bar-row"><span class="name">Marketing</span><div class="bar-track"><div class="bar-fill" style="--w:72%"></div></div></div>
-        <div class="bar-row"><span class="name">Procesos</span><div class="bar-track"><div class="bar-fill" style="--w:48%"></div></div></div>
-        <div class="bar-row"><span class="name">Equipo</span><div class="bar-track"><div class="bar-fill" style="--w:83%"></div></div></div>
+        <div class="lbl">Avance comercial</div>
+        <div class="bar-row"><span class="name">Diagnóstico</span><div class="bar-track"><div class="bar-fill" style="--w:72%"></div></div></div>
+        <div class="bar-row"><span class="name">Propuesta</span><div class="bar-track"><div class="bar-fill" style="--w:48%"></div></div></div>
+        <div class="bar-row"><span class="name">Cierre</span><div class="bar-track"><div class="bar-fill" style="--w:83%"></div></div></div>
       </div>
     </div>
   </div>
@@ -408,24 +456,29 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Cómo trabajamos</span>
-      <h2>Un proceso, no una consultoría de una sola reunión.</h2>
-      <p>Estos tres pasos ocurren en orden, y quedan registrados — no se repiten reuniones porque nadie recuerda qué quedó pendiente.</p>
+      <h2>Método Táctika: descubrir, diseñar, implementar y evolucionar.</h2>
+      <p>No vendemos un software aislado. Trabajamos con un método que parte entendiendo tu empresa y termina con una herramienta operativa para gestionar mejor.</p>
     </div>
     <div class="steps">
       <div class="step">
-        <div class="step-num mono">01 · Diagnóstico</div>
-        <h3>Revisamos tu empresa con pauta, no con impresiones</h3>
-        <p>Estrategia, marketing, procesos internos y equipo. Cada área queda con un resultado medible, no una opinión general.</p>
+        <div class="step-num mono">01 · Descubrir</div>
+        <h3>Diagnosticamos cómo funciona tu empresa</h3>
+        <p>Levantamos procesos, dolores, herramientas actuales, oportunidades comerciales y puntos críticos de gestión.</p>
       </div>
       <div class="step">
-        <div class="step-num mono">02 · Plan de acción</div>
-        <h3>Qué hacer, quién lo hace y para cuándo</h3>
-        <p>Cada acción tiene un responsable y una fecha límite. Nada queda como "recomendación general" sin dueño.</p>
+        <div class="step-num mono">02 · Diseñar</div>
+        <h3>Armamos una solución concreta</h3>
+        <p>Definimos prioridades, plan de acción, indicadores y módulos que realmente necesita tu negocio.</p>
       </div>
       <div class="step">
-        <div class="step-num mono">03 · Seguimiento</div>
-        <h3>Revisamos avances de verdad, no de memoria</h3>
-        <p>Reuniones periódicas apoyadas en el estado real de cada tarea — tú también puedes verlo cuando quieras.</p>
+        <div class="step-num mono">03 · Implementar</div>
+        <h3>Configuramos Táctika Suite para tu operación</h3>
+        <p>Activamos CRM, tareas, reportes, propuestas, documentos o los módulos que correspondan a tu empresa.</p>
+      </div>
+      <div class="step">
+        <div class="step-num mono">04 · Evolucionar</div>
+        <h3>Acompañamos la mejora continua</h3>
+        <p>Revisamos avances, ajustamos procesos y hacemos crecer el sistema según cambian tus necesidades.</p>
       </div>
     </div>
   </div>
@@ -434,9 +487,34 @@
 <section id="servicios">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Por qué Táctika</span>
-      <h2>La mayoría de las asesorías terminan en un PDF que nadie vuelve a abrir.</h2>
-      <p>Nosotros construimos la herramienta que usamos contigo, para que el trabajo de ordenar tu empresa no se pierda entre reuniones y correos.</p>
+      <span class="eyebrow">Oferta principal</span>
+      <h2>Una oferta simple: diagnóstico, implementación y acompañamiento.</h2>
+      <p>El diagnóstico abre la puerta. La implementación convierte el plan en sistema. La suscripción mantiene el avance vivo.</p>
+    </div>
+    <div class="oferta-grid" id="precios">
+      <div class="offer-main">
+        <h3>No entregamos solo recomendaciones. Dejamos un sistema funcionando.</h3>
+        <p>Después del diagnóstico, puedes avanzar con una implementación de Táctika Suite adaptada a tu empresa. No partes desde cero ni compras un ERP pesado: activamos lo que realmente necesitas.</p>
+        <div class="offer-list">
+          <div>CRM y seguimiento comercial</div>
+          <div>Propuestas y reportes en PDF</div>
+          <div>Planes de acción con responsables</div>
+          <div>Importación de datos desde Excel</div>
+          <div>Indicadores y dashboard ejecutivo</div>
+          <div>Acompañamiento mensual</div>
+        </div>
+        <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20conocer%20los%20planes%20de%20T%C3%A1ctika%20Consulting" target="_blank" rel="noopener" class="btn btn-primary">Quiero una propuesta</a>
+      </div>
+      <aside class="price-box">
+        <div class="tag">Valores referenciales</div>
+        <div class="price">Desde $29.990</div>
+        <p>Diagnóstico de entrada para entender tu empresa y definir si Táctika puede aportar valor real.</p>
+        <div class="price-row"><span>Diagnóstico</span><strong>$29.990</strong></div>
+        <div class="price-row"><span>Implementación</span><strong>desde $199.990</strong></div>
+        <div class="price-row"><span>Plan Base</span><strong>$49.900/mes</strong></div>
+        <div class="price-row"><span>Plan Profesional</span><strong>$89.900/mes</strong></div>
+        <div class="price-row"><span>Enterprise</span><strong>desde $149.900/mes</strong></div>
+      </aside>
     </div>
   </div>
 </section>
@@ -447,7 +525,7 @@
       <div class="plat-copy">
         <span class="eyebrow" style="color:var(--amber-400)">La plataforma</span>
         <h2>Táctika Business Suite: tu empresa, siempre a la vista.</h2>
-        <p class="lead">No es un sistema genérico. Es la plataforma con la que hacemos tu diagnóstico, armamos tu plan y le hacemos seguimiento — y a la que tú también tienes acceso.</p>
+        <p class="lead">No es un sistema genérico. Es la plataforma que configuramos para ordenar tu diagnóstico, tu proceso comercial, tus propuestas y tus planes de acción en un solo lugar.</p>
         <ul class="plat-list">
           <li><span class="check">✓</span> Tu diagnóstico y resultado por área, siempre disponible, sin pedirlo por correo.</li>
           <li><span class="check">✓</span> Tus planes de acción con estado, responsable y fecha límite, no una lista suelta.</li>
@@ -455,7 +533,7 @@
           <li><span class="check">✓</span> Acceso directo desde el navegador, sin instalar nada.</li>
         </ul>
         <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20ver%20la%20plataforma%20Táctika%20Business%20Suite" target="_blank" rel="noopener" class="btn btn-primary">Quiero ver la plataforma en vivo</a>
-        <div class="plat-note"><strong>Nota:</strong> la plataforma es parte del servicio de asesoría — no se vende por separado ni reemplaza las reuniones de trabajo.</div>
+        <div class="plat-note"><strong>Nota:</strong> Táctika Suite se implementa como parte de un proceso de consultoría. Primero entendemos tu operación y luego activamos los módulos que tienen sentido para tu empresa.</div>
       </div>
       <div class="plat-visual">
         <div class="mock" style="box-shadow:none;">
@@ -555,8 +633,8 @@
     <div class="cta-grid">
       <div>
         <span class="eyebrow">Conversemos</span>
-        <h2>Agenda una primera reunión de diagnóstico, sin costo.</h2>
-        <p class="lead">Cuéntanos de tu empresa y te contactamos para coordinar una reunión — presencial en Buin o por videollamada.</p>
+        <h2>Agenda tu Diagnóstico Empresarial Táctika.</h2>
+        <p class="lead">Cuéntanos de tu empresa y te contactamos para coordinar el levantamiento inicial — presencial en Buin o por videollamada.</p>
 
         <div class="contact-row">
           <div class="contact-ic">✆</div>
