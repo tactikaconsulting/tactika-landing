@@ -975,6 +975,12 @@
       <div style="font-size:12px;color:#8794B3;">Respondemos al instante</div>
     </div>
     <div id="tk-chat-messages" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;font-family:'Inter',sans-serif;font-size:13.5px;"></div>
+    <div id="tk-chat-quick-actions" style="padding:0 14px 10px;display:flex;flex-wrap:wrap;gap:8px;font-family:'Inter',sans-serif;">
+      <button data-message="Quiero ordenar clientes y seguimiento" style="border:1px solid #CBD5E1;background:#F8FAFC;border-radius:999px;padding:7px 10px;font-size:12px;cursor:pointer;color:#26364F;">Clientes</button>
+      <button data-message="Quiero ordenar ventas y propuestas" style="border:1px solid #CBD5E1;background:#F8FAFC;border-radius:999px;padding:7px 10px;font-size:12px;cursor:pointer;color:#26364F;">Ventas</button>
+      <button data-message="Quiero ordenar inventario o procesos internos" style="border:1px solid #CBD5E1;background:#F8FAFC;border-radius:999px;padding:7px 10px;font-size:12px;cursor:pointer;color:#26364F;">Inventario</button>
+      <button data-message="Quiero agendar un diagnóstico" style="border:1px solid #3159E8;background:#EEF4FF;border-radius:999px;padding:7px 10px;font-size:12px;cursor:pointer;color:#1745D1;font-weight:700;">Agendar diagnóstico</button>
+    </div>
     <div style="padding:10px;border-top:1px solid #E4E7EC;display:flex;gap:8px;">
       <input id="tk-chat-input" type="text" placeholder="Escribe tu mensaje..." style="flex:1;border:1px solid #E4E7EC;border-radius:8px;padding:10px;font-size:13.5px;outline:none;">
       <button id="tk-chat-send" style="background:#3159E8;color:#fff;border:none;border-radius:8px;padding:0 14px;cursor:pointer;font-weight:600;">→</button>
@@ -992,17 +998,26 @@
   const messagesEl = document.getElementById("tk-chat-messages");
   const input = document.getElementById("tk-chat-input");
   const sendBtn = document.getElementById("tk-chat-send");
+  const quickActions = document.getElementById("tk-chat-quick-actions");
 
   let historial = [];
   let abierto = false;
 
   toggle.addEventListener("click", () => {
-    abierto = !abierto;
+    alternarChat();
+  });
+
+  function mensajeInicial() {
+    agregarMensaje("bot", "Hola, soy el asistente de Táctika Consulting. En 2 minutos puedo orientarte para saber si tu empresa necesita ordenar clientes, ventas, inventario o procesos. ¿Qué te gustaría mejorar primero?");
+  }
+
+  function alternarChat(forzarAbierto) {
+    abierto = typeof forzarAbierto === "boolean" ? forzarAbierto : !abierto;
     panel.style.display = abierto ? "flex" : "none";
     if (abierto && historial.length === 0) {
-      agregarMensaje("bot", "¡Hola! Soy el asistente de Táctika Consulting. ¿En qué puedo ayudarte con tu empresa?");
+      mensajeInicial();
     }
-  });
+  }
 
   function agregarMensaje(tipo, texto) {
     const burbuja = document.createElement("div");
@@ -1024,14 +1039,15 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  async function enviar() {
-    const texto = input.value.trim();
+  async function enviar(textoForzado) {
+    const texto = (textoForzado || input.value).trim();
     if (!texto) return;
 
     agregarMensaje("user", texto);
     historial.push({ role: "user", content: texto });
     input.value = "";
     sendBtn.disabled = true;
+    quickActions.style.display = "none";
 
     agregarMensaje("bot", "Escribiendo...");
     const indicador = messagesEl.lastChild;
@@ -1050,6 +1066,10 @@
       const data = await res.json();
       indicador.remove();
 
+      if (!res.ok) {
+        throw new Error(data.error || "Error en el agente");
+      }
+
       const respuesta = data.respuesta || "Disculpa, tuve un problema para responder. ¿Puedes intentar de nuevo?";
       agregarMensaje("bot", respuesta);
       historial.push({ role: "assistant", content: respuesta });
@@ -1066,9 +1086,19 @@
   }
 
   sendBtn.addEventListener("click", enviar);
+  quickActions.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", () => enviar(btn.dataset.message || btn.textContent));
+  });
   input.addEventListener("keypress", (e) => {
     if (e.key === "Enter") enviar();
   });
+
+  setTimeout(() => {
+    if (!abierto && historial.length === 0 && !sessionStorage.getItem("tk-chat-opened")) {
+      sessionStorage.setItem("tk-chat-opened", "1");
+      alternarChat(true);
+    }
+  }, 5500);
 })();
 </script>
 
