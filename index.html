@@ -141,6 +141,32 @@
   }
   .proof-item strong{display:block;color:var(--navy-900);font-size:18px;font-family:'Space Grotesk',sans-serif;}
   .proof-item span{display:block;color:var(--mist);font-size:12.5px;margin-top:2px;}
+  .diagnosis-strip{
+    margin-top:22px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    max-width:760px;
+  }
+  .diagnosis-item{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:13px 14px;
+    box-shadow:0 10px 30px -24px rgba(15,23,42,0.45);
+  }
+  .diagnosis-item b{
+    display:block;
+    color:var(--navy-900);
+    font-size:13px;
+    margin-bottom:4px;
+  }
+  .diagnosis-item span{
+    display:block;
+    color:var(--mist);
+    font-size:12px;
+    line-height:1.45;
+  }
 
   .fade-up{opacity:0;transform:translateY(14px);animation:fadeUp .6s ease forwards;}
   @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
@@ -520,6 +546,7 @@
     .hero-grid{grid-template-columns:1fr;}
     .hero h1{font-size:34px;}
     .hero-proof{grid-template-columns:1fr;}
+    .diagnosis-strip{grid-template-columns:1fr;}
     .steps{grid-template-columns:1fr;gap:34px;}
     .step:not(:last-child)::after{display:none;}
     .oferta-grid{grid-template-columns:1fr;}
@@ -556,20 +583,26 @@
 <section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow fade-up">Método Táctika · Consultoría + sistema propio</span>
-      <h1 class="fade-up" style="animation-delay:.05s">Ordenamos tu pyme con diagnóstico, plan de acción <em>y un sistema hecho para tu empresa.</em></h1>
-      <p class="lead fade-up" style="animation-delay:.1s">Primero entendemos cómo trabaja tu negocio. Luego diseñamos una solución concreta y la implementamos en Táctika Suite para que puedas controlar clientes, tareas, propuestas, reportes y seguimiento desde un solo lugar.</p>
+      <span class="eyebrow fade-up">Método Táctika · Diagnóstico + sistema propio</span>
+      <h1 class="fade-up" style="animation-delay:.05s">Si tu pyme depende de WhatsApp, Excel y memoria, <em>te ayudamos a tomar el control.</em></h1>
+      <p class="lead fade-up" style="animation-delay:.1s">Diagnosticamos cómo trabaja tu empresa, detectamos los puntos que frenan la gestión y configuramos Táctika Suite para ordenar clientes, ventas, tareas, propuestas y seguimiento desde un solo lugar.</p>
       <div class="hero-ctas fade-up" style="animation-delay:.15s">
-        <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20T%C3%A1ctika%20para%20mi%20empresa" target="_blank" rel="noopener" class="btn btn-primary">Agendar diagnóstico</a>
+        <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20T%C3%A1ctika%20para%20mi%20empresa" target="_blank" rel="noopener" class="btn btn-primary">Agendar diagnóstico de $29.990</a>
         <a href="#capturas" class="btn btn-ghost">Ver cómo funciona la plataforma</a>
       </div>
       <div class="microtrust fade-up" style="animation-delay:.2s">
-        <span class="dot"></span> Diagnóstico de entrada desde $29.990. Si avanzas con la implementación, puede descontarse del proyecto.
+        <span class="dot"></span> Si avanzas con la implementación, el diagnóstico puede descontarse del proyecto.
       </div>
       <div class="hero-proof fade-up" style="animation-delay:.25s">
         <div class="proof-item"><strong>01</strong><span>Diagnóstico claro</span></div>
         <div class="proof-item"><strong>02</strong><span>Sistema configurado</span></div>
         <div class="proof-item"><strong>03</strong><span>Acompañamiento mensual</span></div>
+      </div>
+      <div class="diagnosis-strip fade-up" style="animation-delay:.3s">
+        <div class="diagnosis-item"><b>Reunión inicial</b><span>Entendemos tu negocio, equipo, clientes y forma actual de trabajar.</span></div>
+        <div class="diagnosis-item"><b>Problemas críticos</b><span>Detectamos fugas de información, atrasos, desorden y tareas sin seguimiento.</span></div>
+        <div class="diagnosis-item"><b>Plan de acción</b><span>Priorizamos mejoras concretas para los próximos 30 días.</span></div>
+        <div class="diagnosis-item"><b>Sistema recomendado</b><span>Definimos qué módulos activar en Táctika Suite según tu caso.</span></div>
       </div>
     </div>
 
@@ -632,13 +665,13 @@
   <div class="wrap">
     <div class="section-head">
       <span class="eyebrow">Oferta principal</span>
-      <h2>Una oferta simple: diagnóstico, implementación y acompañamiento.</h2>
-      <p>El diagnóstico abre la puerta. La implementación convierte el plan en sistema. La suscripción mantiene el avance vivo.</p>
+      <h2>Primero claridad. Después implementación. Luego mejora continua.</h2>
+      <p>No partimos instalando pantallas. Partimos entendiendo qué proceso duele, cuánto desorden genera y qué sistema vale la pena implementar.</p>
     </div>
     <div class="oferta-grid" id="precios">
       <div class="offer-main">
-        <h3>No entregamos solo recomendaciones. Dejamos un sistema funcionando.</h3>
-        <p>Después del diagnóstico, puedes avanzar con una implementación de Táctika Suite adaptada a tu empresa. No partes desde cero ni compras un ERP pesado: activamos lo que realmente necesitas.</p>
+        <h3>El diagnóstico no termina en un informe guardado. Termina en una decisión.</h3>
+        <p>Te mostramos qué está frenando la gestión de tu empresa y, si tiene sentido avanzar, configuramos Táctika Suite con los módulos que realmente necesitas. Sin ERP pesado, sin funciones de relleno y sin obligarte a cambiar todo de golpe.</p>
         <div class="offer-list">
           <div>CRM y seguimiento comercial</div>
           <div>Propuestas y reportes en PDF</div>
@@ -647,12 +680,12 @@
           <div>Indicadores y dashboard ejecutivo</div>
           <div>Acompañamiento mensual</div>
         </div>
-        <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20conocer%20los%20planes%20de%20T%C3%A1ctika%20Consulting" target="_blank" rel="noopener" class="btn btn-primary">Quiero una propuesta</a>
+        <a href="https://wa.me/56964295330?text=Hola%2C%20quiero%20agendar%20un%20diagn%C3%B3stico%20T%C3%A1ctika%20para%20mi%20empresa" target="_blank" rel="noopener" class="btn btn-primary">Quiero diagnosticar mi empresa</a>
       </div>
       <aside class="price-box">
         <div class="tag">Valores referenciales</div>
         <div class="price">Desde $29.990</div>
-        <p>Diagnóstico de entrada para entender tu empresa y definir si Táctika puede aportar valor real.</p>
+        <p>Diagnóstico de entrada para entender tu empresa, priorizar mejoras y definir si conviene implementar Táctika Suite.</p>
         <div class="price-row"><span>Diagnóstico</span><strong>$29.990</strong></div>
         <div class="price-row"><span>Implementación</span><strong>desde $199.990</strong></div>
         <div class="price-row"><span>Plan Base</span><strong>$49.900/mes</strong></div>
@@ -887,7 +920,7 @@
       <div>
         <span class="eyebrow">Conversemos</span>
         <h2>Agenda tu Diagnóstico Empresarial Táctika.</h2>
-        <p class="lead">Cuéntanos de tu empresa y te contactamos para coordinar el levantamiento inicial — presencial en Buin o por videollamada.</p>
+        <p class="lead">En una primera conversación vemos si podemos ayudarte. Si tu empresa necesita orden, seguimiento o control comercial, coordinamos el diagnóstico — presencial en Buin o por videollamada.</p>
 
         <div class="contact-row">
           <div class="contact-ic">✆</div>
